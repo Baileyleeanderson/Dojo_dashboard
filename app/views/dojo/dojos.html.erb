@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DojoDashboard</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% if flash[:success] %>
+    <div class="success"><%= flash[:success] %></div>
+  <% end %>
+<h1>DOJOS</h1>
+<table>
+  <thead>
+    <tr>
+      <td>Dojo Branch</td>
+      <td>Street Address</td>
+      <td>City</td>
+      <td>State</td>
+      <td>Actions</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @dojos.each do |dojo| %>
+    <tr>
+      <td><%= dojo.branch %></td>
+      <td><%= dojo.street %></td>
+      <td><%= dojo.city %></td>
+      <td><%= dojo.state %></td>
+      <td><a href='dojos/<%= dojo.id %>'>Show</a>&nbsp
+      <a href='dojos/<%= dojo.id %>/edit'>Edit</a>&nbsp
+      <form action='dojos/<%= dojo.id %>' method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" value="Destroy"></form></td>
+    </tr>
+  <% end %> 
+  </tbody>
+</table>
+<h2><a href='/dojos/new' method='POST'>New Dojo</a></h2>
+
+
+<%= yield %>
+
+</body>
+</html>

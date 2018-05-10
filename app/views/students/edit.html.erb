@@ -1,0 +1,20 @@
+
+<h1>Editing <%= @student.first_name %>&nbsp<%= @student.last_name %></h1>
+    <form action="/dojos/<%= @dojo.id %>/students/<%= @student.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <h2>First Name</h2><input type="text" name="branch" value="<%= @student.first_name %>">
+    <h2>Last Name</h2><input type="text" name="street" value="<%= @student.last_name %>">
+    <h2>Email</h2><input type="text" name="city" value="<%= @student.email %>">
+    <h2>Dojo</h2>
+        <select name='dojo_id'>
+        <% @dojos.each do |dojo|%>
+            <option value='<%= dojo.id%>'><%= dojo.branch %></option>
+        <% end %>
+        </select>
+    <input type='submit' value='Update'>
+</form>
+<a href='/dojos/<%= @dojo.id %>/students/<%= @student.id %>'><%= @student.first_name %></a>
+
+
+<%= yield %>
